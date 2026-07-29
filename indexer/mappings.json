@@ -1,0 +1,55 @@
+{
+  "mappings": {
+    "properties": {
+      "id": { "type": "integer" },
+      "domain": { "type": "keyword" },
+      "url": { "type": "keyword" },
+      "title": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "keyword": { "type": "keyword" },
+          "ngram": {
+            "type": "text",
+            "analyzer": "ngram_analyzer",
+            "search_analyzer": "standard"
+          }
+        }
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "meta_description": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "meta_keywords": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "content_type": { "type": "keyword" },
+      "pagerank_score": { "type": "float" },
+      "engagement_score": { "type": "float" },
+      "freshness_score": { "type": "float" },
+      "last_modified": { "type": "date" },
+      "crawled_at": { "type": "date" }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "ngram_analyzer": {
+          "tokenizer": "ngram_tokenizer"
+        }
+      },
+      "tokenizer": {
+        "ngram_tokenizer": {
+          "type": "ngram",
+          "min_gram": 2,
+          "max_gram": 5
+        }
+      }
+    }
+  }
+}
