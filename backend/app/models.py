@@ -55,9 +55,10 @@ class Page(Base):
     
     def to_elasticsearch_doc(self):
         """Convert page to Elasticsearch document"""
+        domain_name = self.domain.domain_name if self.domain else None
         return {
             "id": self.id,
-            "domain": self.domain.domain_name,
+            "domain": domain_name,
             "url": self.url,
             "title": self.title,
             "content": self.content,
@@ -68,7 +69,7 @@ class Page(Base):
             "engagement_score": self.engagement_score,
             "freshness_score": self.freshness_score,
             "last_modified": self.last_modified.isoformat() if self.last_modified else None,
-            "crawled_at": self.crawled_at.isoformat()
+            "crawled_at": self.crawled_at.isoformat() if self.crawled_at else None
         }
 
 class SearchHistory(Base):

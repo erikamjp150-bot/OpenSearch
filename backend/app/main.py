@@ -6,7 +6,7 @@ from datetime import datetime
 import logging
 
 # Import routers and config
-from .routers import search, auth, admin
+from .routers import search, auth, admin, ranking, dashboard
 from .config import settings
 
 logging.basicConfig(level=logging.INFO)
@@ -31,6 +31,8 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/auth", tags=["authentication"])
 app.include_router(search.router, prefix="/search", tags=["search"])
 app.include_router(admin.router, prefix="/admin", tags=["administration"])
+app.include_router(ranking.router, tags=["ranking"])
+app.include_router(dashboard.router, tags=["dashboard"])
 
 @app.get("/")
 async def root():
